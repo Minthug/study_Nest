@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
+import { Cat } from './cats/entity/cats.entity';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
@@ -14,8 +15,8 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       username: 'min',
       password: '1234',
       database: 'test',
-      entities: [],
-      synchronize: true,
+      entities: [Cat],
+      synchronize: true, // 운영모드 x 개발모드에서만 사용 
     }),
     CatsModule
   ],
