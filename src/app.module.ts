@@ -1,11 +1,24 @@
 import { Logger, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
-  imports: [CatsModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'min',
+      password: '1234',
+      database: 'test',
+      entities: [],
+      synchronize: true,
+    }),
+    CatsModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
