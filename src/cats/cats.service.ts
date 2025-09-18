@@ -16,6 +16,15 @@ export class CatsService {
         return this.catsRepository.find();
     }
 
+
+    /*추천: findOneOrFail이 더 간결하고 RESTful하게 동작합니다! */
+    findOne(id: number): Promise<Cat> {
+        return this.catsRepository.findOneOrFail({
+            where: { id }
+        });
+    }
+
+    /*
     async findOne(id: number): Promise<Cat> {
         const cat = await this.catsRepository.findOne({
             where: { id }
@@ -26,6 +35,7 @@ export class CatsService {
         }
         return cat;
     }
+    */
 
     async create(cat: Cat): Promise<void> {
         await this.catsRepository.save(cat);
